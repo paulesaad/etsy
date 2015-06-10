@@ -2,25 +2,48 @@
 
 // es5 polyfills, powered by es5-shim
 require("es5-shim")
-// es6 polyfills, powered by babel
+    // es6 polyfills, powered by babel
 require("babel/register")
 
-var Promise = require('es6-promise').Promise
-// just Node?
-// var fetch = require('node-fetch')
-// Browserify?
-// require('whatwg-fetch') //--> not a typo, don't store as a var
+var Promise = require('es6-promise').Promise,
+    $ = require('jQuery'),
+    backbone = require('backbone')
 
-// other stuff that we don't really use in our own code
-// var Pace = require("../bower_components/pace/pace.js")
+import * as templates from './templates.js'
+import * as api from './etsy-api.js'
 
-// require your own libraries, too!
-// var Router = require('./app.js')
 
-// window.addEventListener('load', app)
+var EtsyRouter = backbone.Router.extend({
+    routes: {
+        'details/:id': 'details',
+        'search/:query': 'search',
+        '*default': 'home'
+    },
+    home: () => {
+        api.getTrending().then((trending_json) => {
+            document.body.innerHTML = templates.home(trending_json.results)
+            console.log(trending_json.results)
+        })
+    },
+    search: (query) => {
+        api.getSearch(query).then((search_json) => {
+            document.body.innerHTML = templates.home(search_json.results)
+        })
+    },
+    details: (item_id) => {
+        api.getDetails(item_id).then((details_json) => {
+            document.body.innerHTML = templates.details(details_json.results[0])
+            console.log(details_json.results[0])
+        })
+    },
+    initialize: () => {
+        backbone.history.start()
+    }
+})
 
-// function app() {
-    // start app
-    // new Router()
-// }
+var router = new EtsyRouter()
 
+$('body').on('submit', 'form', (e) => {
+    e.preventDefault()
+    window.location.hash = `search/${document.querySelector('.search_bar').value}`
+})
