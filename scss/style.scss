@@ -91,12 +91,20 @@ img {
 
  $orange: rgb(243, 77, 0);
  $eggshell: rgb(235, 235, 230);
+ $blue: rgb(65, 152, 186);
+body {
+    background-color: $eggshell;
+}
+
+a {
+    text-decoration: none;
+    color: #ccc;
+}
 
  .toolbar{
     overflow: auto;
-    background-color: #efefef;
+    background-color: #fff;
     margin-bottom: 1rem;
-    position: relative;
     .logo{
         display:inline-block;
         padding: 0.5rem 1.5rem;
@@ -106,6 +114,10 @@ img {
     }
     form {
         display: inline-block;
+        .submit_button{
+            background: $blue;
+            color: white;
+        }
     }
  }
 
@@ -113,5 +125,26 @@ img {
     max-width:1024px;
     padding: 2rem;
     margin: auto;
-    background-color: $eggshell;
+
+    a{
+        padding: 1rem;
+    }
+ }
+
+ .details-screen{
+    .grid{ 
+        img {
+            width: 400px;
+            display: block;
+            margin: auto;
+            padding-bottom: 1rem;
+            position: relative;
+            &::before{
+                content: '';
+                display: block;
+                position: absolute;
+                
+            }
+        }
+    }
  }

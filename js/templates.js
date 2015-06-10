@@ -6,8 +6,16 @@ var toolbar = () => `<div class="toolbar">
         </form>
     </div>`
 
-export var details = (details_item) => `<div class="container details-screen">
-    ${toolbar()}
+var gridItem = (item) => `<a href = "#details/${item.listing_id}/${item.Shop.shop_id}">
+    <img src = "${item.Images[0].url_570xN}">
+    <div> 
+        <p>${item.title}<span>$${item.price}</span></p>
+    </div>
+    </a>`
+
+
+export var details = (details_item, shop_items) => `${toolbar()}
+<div class="container details-screen">
     <div class="grid">
         <img src="${details_item.Images[0].url_570xN}">
         <div>
@@ -15,18 +23,21 @@ export var details = (details_item) => `<div class="container details-screen">
             <p>${details_item.description}
         </div>
     </div>
+    <hr>
+    <div class="shop_listings">
+        ${shop_items.map((shop_item) => {
+            console.log(shop_item)
+            return `${gridItem(shop_item)}`
+        }).slice(0,6).join('')
+}    </div>
 </div>`
 
-export var home = (trending_items) => `<div class="container home-screen">
-    ${toolbar()}
+export var home = (trending_items) => `${toolbar()}
+<div class="container home-screen">
     <div class="grid grid-2-400 grid-4-800 grid-6-1024">
         ${trending_items.map((trending_item) => {
-            return `<a href = "#details/${trending_item.listing_id}">
-    <img src = "${trending_item.Images[0].url_570xN}">
-    <div> 
-        <p>${trending_item.title}<span>$${trending_item.price}</span></p>
-    </div>
-    </a>`
+            console.log(trending_item)
+            return `${gridItem(trending_item)}`
     }).join('')
 } </div>
 </div>`
