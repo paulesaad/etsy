@@ -34,8 +34,6 @@ var EtsyRouter = backbone.Router.extend({
     		api.getDetails(item_id),
     		api.getShopItems(shop_id)
     	).then((details_json, shop_json) => {
-    		console.log(details_json[0].results[0].Shop)
-    		console.log(shop_json[0].results)
             document.body.innerHTML = templates.details(details_json[0].results[0], shop_json[0].results)
         })
     },

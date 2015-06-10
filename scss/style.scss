@@ -141,10 +141,27 @@ a {
             position: relative;
             &::before{
                 content: '';
-                display: block;
+                display: inline-block;
                 position: absolute;
-                
+                top:50%;
+                right:100%;
+                width: 0.4em;
+                height: 0.4em;
+                border-right: 0.2em solid black;
+                border-top: 0.2em solid black;
+                transform: rotate(45deg) translateY(-50%);
+                margin-right: 0.5em;
             }
         }
     }
- }
+    .shop_listings{
+        h6{
+            display: block;
+        }
+        a {
+            display: inline-block;
+            width: 20%;
+            vertical-align: text-top;
+        }
+    }
+}

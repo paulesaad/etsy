@@ -14,7 +14,8 @@ var gridItem = (item) => `<a href = "#details/${item.listing_id}/${item.Shop.sho
     </a>`
 
 
-export var details = (details_item, shop_items) => `${toolbar()}
+export var details = (details_item, shop_items) => 
+`${toolbar()}
 <div class="container details-screen">
     <div class="grid">
         <img src="${details_item.Images[0].url_570xN}">
@@ -25,10 +26,10 @@ export var details = (details_item, shop_items) => `${toolbar()}
     </div>
     <hr>
     <div class="shop_listings">
+    <h6>Other items from <span>${details_item.Shop.shop_name}</span></h6>
         ${shop_items.map((shop_item) => {
-            console.log(shop_item)
             return `${gridItem(shop_item)}`
-        }).slice(0,6).join('')
+        }).slice(0,5).join('')
 }    </div>
 </div>`
 
