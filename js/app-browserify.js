@@ -24,7 +24,6 @@ var EtsyRouter = backbone.Router.extend({
         api.getTrending().then(function(trending_json){
             document.body.innerHTML = templates.home(trending_json.results)
             this.currentTrending = trending_json.results
-            console.log(this.currentTrending)
         }.bind(this))
     },
     search: (query) => {

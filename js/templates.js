@@ -12,36 +12,63 @@ var gridItem = (item) => `<a href = "#details/${item.listing_id}/${item.Shop.sho
     </div>
     </a>`
 
-// var getPreviousHref = (det_item, tren_items) => {
-//     tren_items.filter((tren_item, index, tren_items) => {
-//         if (tren_item.listing_id = det_item.listing_id) {
-//             var listing = tren_items[index-1].listing_id,
-//                 shop = tren_items[index-1].Shop.shop_id
-//             return `#details/${listing}/${shop}`
-//         }
-//     })
-// }
 
-// var getNextHref = (det_item, tren_items) => {
-//     tren_items.filter((tren_item, index, tren_items) => {
-//         if (tren_item.listing_id = det_item.listing_id) {
-//             var listing = tren_items[index+1].listing_id,
-//                 shop = tren_items[index+1].Shop.shop_id
-//             return `#details/${listing}/${shop}`
-//         }
-//     })
-// }
+var getPreviousHref = (det_item, tren_items) => {
 
-// <a href = ${getPreviousHref(details_item, trending_items)} class="previous_listing"><div id="left-arrow"> > </div></a>
-// <a href = ${getNextHref(details_item, trending_items)} class="next_listing"><div id="right-arrow"> < </div></a>
+    var getIndexFromData = (tren_items) => {
+        var theIndex
+
+        tren_items.forEach((item, index) => {
+            if (item.listing_id === det_item.listing_id) {
+                theIndex = index
+            }
+        })
+
+        return theIndex
+    }
+
+    if (getIndexFromData(tren_items) > 0){
+        var listingID = tren_items[getIndexFromData(tren_items)-1].listing_id,
+            shopID = tren_items[getIndexFromData(tren_items)-1].shop_id
+
+        return `#details/${listingID}/${shopID}`
+    } else{
+        return `javascript:void(0)`
+    }
+}
+
+var getNextHref = (det_item, tren_items) => {
+
+    var getIndexFromData = (tren_items) => {
+        var theIndex
+
+        tren_items.forEach((item, index) => {
+            if (item.listing_id === det_item.listing_id) {
+                theIndex = index
+            }
+        })
+
+        return theIndex
+    }
+
+    if (getIndexFromData(tren_items) < tren_items.length){
+        var listingID = tren_items[getIndexFromData(tren_items)+1].listing_id,
+            shopID = tren_items[getIndexFromData(tren_items)+1].shop_id
+
+        return `#details/${listingID}/${shopID}`
+    } else{
+        return `javascript:void(0)`
+    }
+}
+
 
 export var details = (details_item, shop_items, trending_items) =>
 `${toolbar() + '</div>'}
 <div class="container details-screen">
     <div class="grid">
         <div class="image-container">
-            <div id="left-arrow"> > </div>
-            <div id="right-arrow"> < </div>
+            <a href = '${getPreviousHref(details_item, trending_items)}' class="previous_listing"><div id="left-arrow"> > </div></a>
+            <a href = '${getNextHref(details_item, trending_items)}' class="next_listing"><div id="left-arrow"> < </div></a>
             <img src="${details_item.Images[0].url_570xN}">
         </div>
         <div>

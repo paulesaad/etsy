@@ -147,17 +147,18 @@ a {
             
             position: relative;
             
-            > div{
+            > a{
                 position: absolute;
+                display: block;
                 top:50%;
                 font-size: 4rem;
                 transform: translateY(-50%);
 
-                &#left-arrow{
+                &.previous_listing{
                     left: 100%;
                 }
 
-                &#right-arrow{
+                &.next_listing{
                     right: 100%;
                 }
             } 
