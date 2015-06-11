@@ -105,6 +105,7 @@ a {
     overflow: auto;
     background-color: #fff;
     margin-bottom: 1rem;
+    overflow: auto;
     .logo{
         display:inline-block;
         padding: 0.5rem 1.5rem;
@@ -113,10 +114,18 @@ a {
         font-size: 2rem;
     }
     form {
-        display: inline-block;
-        .submit_button{
-            background: $blue;
-            color: white;
+        &:first-of-type{
+            display: inline-block;
+            .submit_button{
+                background: $blue;
+                color: white;
+            }
+        }
+        &:nth-of-type(2){
+            float: right;
+            input {
+                margin-right: 0.5rem;
+            }
         }
     }
  }
@@ -132,25 +141,32 @@ a {
  }
 
  .details-screen{
-    .grid{ 
-        img {
-            width: 400px;
-            display: block;
-            margin: auto;
-            padding-bottom: 1rem;
+    .grid{
+
+        .image-container {
+            
             position: relative;
-            &::before{
-                content: '';
-                display: inline-block;
+            
+            > div{
                 position: absolute;
                 top:50%;
-                right:100%;
-                width: 0.4em;
-                height: 0.4em;
-                border-right: 0.2em solid black;
-                border-top: 0.2em solid black;
-                transform: rotate(45deg) translateY(-50%);
-                margin-right: 0.5em;
+                font-size: 4rem;
+                transform: translateY(-50%);
+
+                &#left-arrow{
+                    left: 100%;
+                }
+
+                &#right-arrow{
+                    right: 100%;
+                }
+            } 
+
+            img {
+                width: 400px;
+                display: block;
+                margin: auto;
+                padding-bottom: 1rem;
             }
         }
     }

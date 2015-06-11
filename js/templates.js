@@ -1,10 +1,9 @@
 var toolbar = () => `<div class="toolbar">
         <a href="#" class="logo">ETSY</a>
-        <form>
+        <form class="searchMe">
             <input class="search_bar" type="search">
             <input class="submit_button" type="submit">
-        </form>
-    </div>`
+        </form>`
 
 var gridItem = (item) => `<a href = "#details/${item.listing_id}/${item.Shop.shop_id}">
     <img src = "${item.Images[0].url_570xN}">
@@ -13,12 +12,38 @@ var gridItem = (item) => `<a href = "#details/${item.listing_id}/${item.Shop.sho
     </div>
     </a>`
 
+// var getPreviousHref = (det_item, tren_items) => {
+//     tren_items.filter((tren_item, index, tren_items) => {
+//         if (tren_item.listing_id = det_item.listing_id) {
+//             var listing = tren_items[index-1].listing_id,
+//                 shop = tren_items[index-1].Shop.shop_id
+//             return `#details/${listing}/${shop}`
+//         }
+//     })
+// }
 
-export var details = (details_item, shop_items) => 
-`${toolbar()}
+// var getNextHref = (det_item, tren_items) => {
+//     tren_items.filter((tren_item, index, tren_items) => {
+//         if (tren_item.listing_id = det_item.listing_id) {
+//             var listing = tren_items[index+1].listing_id,
+//                 shop = tren_items[index+1].Shop.shop_id
+//             return `#details/${listing}/${shop}`
+//         }
+//     })
+// }
+
+// <a href = ${getPreviousHref(details_item, trending_items)} class="previous_listing"><div id="left-arrow"> > </div></a>
+// <a href = ${getNextHref(details_item, trending_items)} class="next_listing"><div id="right-arrow"> < </div></a>
+
+export var details = (details_item, shop_items, trending_items) =>
+`${toolbar() + '</div>'}
 <div class="container details-screen">
     <div class="grid">
-        <img src="${details_item.Images[0].url_570xN}">
+        <div class="image-container">
+            <div id="left-arrow"> > </div>
+            <div id="right-arrow"> < </div>
+            <img src="${details_item.Images[0].url_570xN}">
+        </div>
         <div>
             <p>${details_item.title}<span>${details_item.price}</span></p>
             <p>${details_item.description}
@@ -33,12 +58,22 @@ export var details = (details_item, shop_items) =>
 }    </div>
 </div>`
 
-export var home = (trending_items) => `${toolbar()}
+export var home = (trending_items) => 
+`${toolbar() + "<form class='filterMe'>"
+            + "In the last week: <input class='last_week' type='checkbox'>"
+            + "Items on sale: <input class='on_sale' type='checkbox'>"
+            + "Include 3 pics: <input class='three_pics' type='checkbox'>"
+        + "</form> </div>"}
 <div class="container home-screen">
-    <div class="grid grid-2-400 grid-4-800 grid-6-1024">
+    <div class="grid grid-2-400 grid-4-800">
         ${trending_items.map((trending_item) => {
-            console.log(trending_item)
             return `${gridItem(trending_item)}`
     }).join('')
 } </div>
 </div>`
+
+
+
+
+
+
