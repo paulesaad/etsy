@@ -17,19 +17,17 @@ var getPreviousHref = (det_item, tren_items) => {
 
     var getIndexFromData = (tren_items) => {
         var theIndex
-
         tren_items.forEach((item, index) => {
             if (item.listing_id === det_item.listing_id) {
                 theIndex = index
             }
         })
-
         return theIndex
     }
 
     if (getIndexFromData(tren_items) > 0){
         var listingID = tren_items[getIndexFromData(tren_items)-1].listing_id,
-            shopID = tren_items[getIndexFromData(tren_items)-1].shop_id
+            shopID = tren_items[getIndexFromData(tren_items)-1].Shop.shop_id
 
         return `#details/${listingID}/${shopID}`
     } else{
@@ -47,13 +45,12 @@ var getNextHref = (det_item, tren_items) => {
                 theIndex = index
             }
         })
-
         return theIndex
     }
 
     if (getIndexFromData(tren_items) < tren_items.length){
         var listingID = tren_items[getIndexFromData(tren_items)+1].listing_id,
-            shopID = tren_items[getIndexFromData(tren_items)+1].shop_id
+            shopID = tren_items[getIndexFromData(tren_items)+1].Shop.shop_id
 
         return `#details/${listingID}/${shopID}`
     } else{
@@ -63,7 +60,7 @@ var getNextHref = (det_item, tren_items) => {
 
 
 export var details = (details_item, shop_items, trending_items) =>
-`${toolbar() + '</div>'}
+`${toolbar()}</div>
 <div class="container details-screen">
     <div class="grid">
         <div class="image-container">
@@ -85,12 +82,14 @@ export var details = (details_item, shop_items, trending_items) =>
 }    </div>
 </div>`
 
+
 export var home = (trending_items) => 
-`${toolbar() + "<form class='filterMe'>"
-            + "In the last week: <input class='last_week' type='checkbox'>"
-            + "Items on sale: <input class='on_sale' type='checkbox'>"
-            + "Include 3 pics: <input class='three_pics' type='checkbox'>"
-        + "</form> </div>"}
+`${toolbar()}<form class='filterMe'>
+            In the last week: <input class='last_week' type='checkbox'>
+            Items on sale: <input class='on_sale' type='checkbox'>
+            Include 3 pics: <input class='three_pics' type='checkbox'>
+            Filter: <input class="submit_filter" type="submit">
+        </form> </div>
 <div class="container home-screen">
     <div class="grid grid-2-400 grid-4-800">
         ${trending_items.map((trending_item) => {
